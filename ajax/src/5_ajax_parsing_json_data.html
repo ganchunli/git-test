@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>5_ajax_parsing_json_data解析json数据</title>
+    <style>
+        #content {
+            width: 300px;
+            height: 100px;
+            border: 1px solid #000;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>该页面是测试：5_ajax_parsing_json_data解析json数据</h3>
+    <button id="btn">点我发送请求（原生js-ajax—get）</button>
+    <div id="content"></div>
+    <script>
+        const btn = document.getElementById('btn')
+        const content = document.getElementById('content')
+
+        btn.onclick = () => {
+            //实例xhr
+            const xhr = new XMLHttpRequest()
+
+            //绑定监听
+            xhr.onreadystatechange = () => {
+
+            }
+        }
+    </script>
+</body>
+
+</html>

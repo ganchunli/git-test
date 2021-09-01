@@ -46,5 +46,6 @@ app.listen(8080, (err) => {
     console.log("http://127.0.0.1:8080/2_xhr.html");
     console.log("http://127.0.0.1:8080/3_ajax_get.html");
     console.log("http://127.0.0.1:8080/4_ajax_post.html");
+    console.log("http://127.0.0.1:8080/5_ajax_parsing_json_data.html");
   }
 });

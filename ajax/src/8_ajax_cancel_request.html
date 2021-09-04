@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>5_ajax_parsing_json_data解析json数据</title>
+    <title>8_ajax_cancel_request.html ajax取消请求</title>
     <style>
         #content {
             width: 300px;
@@ -15,16 +15,19 @@
 </head>
 
 <body>
-    <h3>该页面是测试：5_ajax_parsing_json_data解析json数据</h3>
+    <h3>该页面是测试：8_ajax_cancel_request.html ajax取消请求</h3>
     <button id="btn">点我发送请求（原生js-ajax—get）</button>
+    <button id="btn2">取消请求</button>
     <div id="content"></div>
     <script>
         const btn = document.getElementById('btn')
+        const btn2 = document.getElementById('btn2')
         const content = document.getElementById('content')
+        let xhr
 
         btn.onclick = () => {
             //实例xhr
-            const xhr = new XMLHttpRequest()
+            xhr = new XMLHttpRequest()
 
             //绑定监听
             xhr.onreadystatechange = () => {
@@ -44,13 +47,30 @@
             }
 
             //配置请求
-            xhr.open('GET', 'http://127.0.0.1:8080/get_person')
+            xhr.open('GET', 'http://127.0.0.1:8080/get_person_delay')
 
             //responseType用于指定返回数据的格式
             xhr.responseType = 'json'
 
+            //配置出错的回掉
+            xhr.onerror = () => {
+                alert('当前网络不稳定，请稍后再试')
+            }
+
+            //超时时间
+            xhr.timeout = 2000
+
+            //超时回掉
+            xhr.ontimeout = () => {
+                alert('网络不给力，请切换网络重试')
+            }
+
             //发送请求
             xhr.send()
+        }
+
+        btn2.onclick = () => {
+            xhr.abort()
         }
     </script>
 </body>

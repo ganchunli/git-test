@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>3_ajax_get请求</title>
+    <title>6_ajax_ie_cache_problem.html 处理ajax_ie浏览器get请求缓存问题</title>
     <style>
         #content {
             width: 300px;
@@ -15,38 +15,41 @@
 </head>
 
 <body>
-    <h3>该页面是测试：3_ajax_get请求</h3>
+    <h3>该页面是测试：6_ajax_ie_cache_problem.html 处理ajax_ie浏览器get请求缓存问题</h3>
     <button id="btn">点我发送请求（原生js-ajax—get）</button>
     <div id="content"></div>
     <script>
-        //获取按钮
         const btn = document.getElementById('btn')
         const content = document.getElementById('content')
 
-        //给按钮绑定监听
         btn.onclick = () => {
-            //1.创建xhr实例对象
+            //实例xhr
             const xhr = new XMLHttpRequest()
 
-            //绑定监听      
+            //绑定监听
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4) {
                     if (xhr.status >= 200 && xhr.status < 300) {
                         console.log(xhr.response)
-                        content.innerHTML = `<h3>${xhr.response}</h3>`
+                        const { name, age, sex } = xhr.response
+                        content.innerHTML = (`
+                        <ul>
+                            <li>姓名:${name}</li>
+                            <li>年龄:${age}</li>
+                            <li>性别:${sex}</li>
+                        </ul>
+                        `)
                     }
                 }
             }
 
-            //2.指定发送请求的：method，url，参数
-            /* 
-            1.形如：key=value&key=value 就是 query 参数的 urlencoded 编码形式
-            2.形如：/xx/xxx/甘春利/25 就是 params 参数
-            */
-            // xhr.open('GET', 'http://127.0.0.1:8080/test_get?name=甘春利&age=25')//携带query参数 urlencoded 编码
-            xhr.open('PUT', 'http://127.0.0.1:8080/test_put')//携带params参数
+            //配置请求
+            xhr.open('GET', 'http://127.0.0.1:8080/get_person')
 
-            //3.发送请求
+            //responseType用于指定返回数据的格式
+            xhr.responseType = 'json'
+
+            //发送请求
             xhr.send()
         }
     </script>

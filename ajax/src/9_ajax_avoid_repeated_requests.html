@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>5_ajax_parsing_json_data解析json数据</title>
+    <title>9_ajax_avoid_repeated_requests.html ajax避免多次重复请求</title>
     <style>
         #content {
             width: 300px;
@@ -15,21 +15,26 @@
 </head>
 
 <body>
-    <h3>该页面是测试：5_ajax_parsing_json_data解析json数据</h3>
+    <h3>该页面是测试：9_ajax_avoid_repeated_requests.html ajax避免多次重复请求</h3>
     <button id="btn">点我发送请求（原生js-ajax—get）</button>
     <div id="content"></div>
     <script>
         const btn = document.getElementById('btn')
         const content = document.getElementById('content')
+        let xhr
+        let isLoading
 
         btn.onclick = () => {
+            if (isLoading) xhr.abort()
+
             //实例xhr
-            const xhr = new XMLHttpRequest()
+            xhr = new XMLHttpRequest()
 
             //绑定监听
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4) {
                     if (xhr.status >= 200 && xhr.status < 300) {
+                        isLoading = false
                         console.log(xhr.response)
                         const { name, age, sex } = xhr.response
                         content.innerHTML = (`
@@ -44,13 +49,14 @@
             }
 
             //配置请求
-            xhr.open('GET', 'http://127.0.0.1:8080/get_person')
+            xhr.open('GET', 'http://127.0.0.1:8080/get_person_delay')
 
             //responseType用于指定返回数据的格式
             xhr.responseType = 'json'
 
             //发送请求
             xhr.send()
+            isLoading = true
         }
     </script>
 </body>

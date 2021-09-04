@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>jquery封装的jsonp</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <button id="btn">点我获取数据</button>
+    <script>
+        const btn = $('#btn')
+        btn.click(() => {
+            $.getJSON('http://localhost:8080/test_jsonp?callback=?', {}, (data) => {
+                console.log(data)
+            })
+        })
+    </script>
+</body>
+
+
+</html>

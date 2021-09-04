@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>12_cross_domain_and_homology_strategy.html 跨域与同源策略</title>
+</head>
+
+<body>
+    <h3>该页面是测试：12_cross_domain_and_homology_strategy.html 跨域与同源策略</h3>
+    <iframe id="baidu" src="https://www.baidu.com"></iframe>
+    <script>
+        /* 
+        非同源会受到哪些限制？
+        1.cookie不能读取
+        2.DOM无法获得
+        3.Ajax请求不能获取数据
+        */
+        const iframe = window.iframes['baidu']
+        const inputNode = iframe.document.getElementById('输入敏感信息的input的id')
+        // console.log(inputNode.value)
+        console.log(iframe.document)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>11_demo_callback_hell.html 演示回调地狱</title>
+</head>
+
+<body>
+    <h3>该页面是测试：11_demo_callback_hell.html 演示回调地狱（主要看代码怎么写的）</h3>
+    <button id="btn1">点我发送请求（jquery-ajax—get）</button>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        const btn1 = $('#btn1')
+
+        btn1.click(() => {
+            //使用jquery发送ajax-get（精简版）
+            $.get('http://127.0.0.1:8080/test_jquery_get', { school: '斯坦福大学' }, (data) => {
+                console.log(data)
+                // content.append(`<div>汽车名：${data.name},价格：${data.price}</div>`)
+                $.get('http://127.0.0.1:8080/test_jquery_get', { school: '斯坦福大学' }, (data) => {
+                    console.log(data)
+                    $.get('http://127.0.0.1:8080/test_jquery_get', { school: '斯坦福大学' }, (data) => {
+                        console.log(data)
+                    }, 'json')
+                }, 'json')
+            }, 'json')
+        })
+    </script>
+</body>
+
+</html>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>5_ajax_parsing_json_data解析json数据</title>
+    <title>7_ajax_abnormal_overtime.html ajax请求的异常与超时处理</title>
     <style>
         #content {
             width: 300px;
@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <h3>该页面是测试：5_ajax_parsing_json_data解析json数据</h3>
+    <h3>该页面是测试：7_ajax_abnormal_overtime.html ajax请求的异常与超时处理</h3>
     <button id="btn">点我发送请求（原生js-ajax—get）</button>
     <div id="content"></div>
     <script>
@@ -44,10 +44,23 @@
             }
 
             //配置请求
-            xhr.open('GET', 'http://127.0.0.1:8080/get_person')
+            xhr.open('GET', 'http://127.0.0.1:8080/get_person_delay')
 
             //responseType用于指定返回数据的格式
             xhr.responseType = 'json'
+
+            //配置出错的回掉
+            xhr.onerror = () => {
+                alert('当前网络不稳定，请稍后再试')
+            }
+
+            //超时时间
+            xhr.timeout = 2000
+
+            //超时回掉
+            xhr.ontimeout = () => {
+                alert('网络不给力，请切换网络重试')
+            }
 
             //发送请求
             xhr.send()

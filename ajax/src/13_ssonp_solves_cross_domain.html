@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>jsonp解决跨域</title>
+</head>
+
+<body>
+    <button id="btn">点我获取数据</button>
+    <script>
+        function demo(a) {
+            console.log(a)
+        }
+
+        const btn = document.getElementById('btn')
+        btn.onclick = () => {
+            // 1.创建script节点
+            const scriptNode = document.createElement('script')
+            //2.给节点指定src属性（请求地址）
+            scriptNode.src = 'http://localhost:8080/test_jsonp?a=test'
+            //3.将节点放入页面
+            document.body.appendChild(scriptNode)
+            window.test = (a) => {
+                console.log(a)
+            }
+            //4.移除已经使用过的script节点
+            document.body.removeChild(scriptNode)
+        }
+    </script>
+    <!-- <script src="http://localhost:8080/test_jsonp"></script> -->
+</body>
+
+
+</html>
